@@ -9,9 +9,11 @@ function initSupabase() {
       return false;
     }
 
-    // Initialize the Supabase client with configuration
-    const SUPABASE_URL = 'https://eqqxpznfmszeewfiagnn.supabase.co';
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVxcXhwem5mbXN6ZWV3ZmlhZ25uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEyMzgzMzYsImV4cCI6MjA1NjgxNDMzNn0.Efyv9JMODab3ek-bEgUQ6orioKdJnlqfywVjNfo6HHk';
+    // Import credentials from config.js
+    if (typeof SUPABASE_URL === 'undefined' || typeof SUPABASE_KEY === 'undefined') {
+      console.error('Supabase credentials not found. Make sure config.js is loaded before supabase.js');
+      return false;
+    }
     
     // Skip initialization if using placeholder values
     if (SUPABASE_URL === 'https://your-project-url.supabase.co' || 
@@ -20,7 +22,7 @@ function initSupabase() {
       return false;
     }
     
-    // Create the client
+    // Create the client using the global supabase from CDN
     supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
     console.log('Supabase client initialized successfully');
     return true;
