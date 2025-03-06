@@ -4,37 +4,62 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Space Shooter Game</title>
-  <link rel="stylesheet" href="style.css">
-  
-  <!-- Supabase JS Library from CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  
-  <!-- Load config first -->
-  <script src="config.js"></script>
-  
-  <!-- Then load game files -->
-  <script src="supabase.js" type="module"></script>
-  <!-- Add your other game script files here -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div id="game-container">
-    <canvas id="gameCanvas"></canvas>
-    <div id="score">Score: 0</div>
-    <div id="lives">Lives: 3</div>
+    <!-- Game will be injected here by Phaser -->
   </div>
   
-  <!-- Script to initialize Supabase on page load -->
-  <script>
-    // Set global variables for non-module access
-    window.SUPABASE_URL = 'https://your-supabase-url.supabase.co';
-    window.SUPABASE_KEY = 'your-supabase-anon-key';
-    
-    // Initialize Supabase after page load
-    document.addEventListener('DOMContentLoaded', () => {
-      if (typeof initSupabase === 'function') {
-        initSupabase();
-      }
-    });
-  </script>
+  <div id="start-screen" class="overlay">
+    <div class="card">
+      <h1>SPACE SHOOTER</h1>
+      <p>Use arrow keys to move and space to shoot</p>
+      <button id="start-game">START GAME</button>
+    </div>
+  </div>
+  
+  <div id="game-over" class="overlay hidden">
+    <div class="card">
+      <h1>GAME OVER</h1>
+      <p>Your score: <span id="final-score">0</span></p>
+      
+      <div id="score-form">
+        <input type="text" id="player-initials" placeholder="Your initials (3 letters)" maxlength="3">
+        <input type="email" id="player-email" placeholder="Your email (for leaderboard)">
+        <button id="submit-score">Submit Score</button>
+      </div>
+      
+      <div id="leaderboard" class="hidden">
+        <h2>Top Scores</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Player</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboard-body">
+            <!-- Leaderboard data will be inserted here -->
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="buttons">
+        <button id="play-again">Play Again</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Supabase client (CDN) -->
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  
+  <!-- Game scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+  <script src="config.js"></script>
+  <script src="supabase.js"></script>
+  <script src="game.js"></script>
+  <script src="ui.js"></script>
 </body>
 </html>

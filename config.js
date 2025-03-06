@@ -1,11 +1,4 @@
 // Supabase configuration
-export const SUPABASE_URL = 'https://your-supabase-url.supabase.co';
-export const SUPABASE_KEY = 'your-supabase-anon-key';
-
-// Game configuration
-export const GAME_CONFIG = {
-  initialLives: 3,
-  levelUpScore: 1000,
-  enemySpawnRate: 0.02,
-  powerupSpawnRate: 0.005
-};
+// Replace these with your actual Supabase credentials
+const SUPABASE_URL = 'https://eqqxpznfmszeewfiagnn.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVxcXhwem5mbXN6ZWV3ZmlhZ25uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEyMzgzMzYsImV4cCI6MjA1NjgxNDMzNn0.Efyv9JMODab3ek-bEgUQ6orioKdJnlqfywVjNfo6HHk';
