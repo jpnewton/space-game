@@ -3,7 +3,8 @@ let supabase;
 
 function initSupabase() {
   try {
-    supabase = supabaseClient.createClient(SUPABASE_URL, SUPABASE_KEY);
+    // Use the global supabase object provided by the CDN
+    supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
     console.log('Supabase client initialized');
     return true;
   } catch (error) {
