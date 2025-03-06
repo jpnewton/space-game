@@ -10,8 +10,8 @@ function initSupabase() {
     }
 
     // Initialize the Supabase client with configuration
-    const SUPABASE_URL = 'https://your-project-url.supabase.co';
-    const SUPABASE_KEY = 'your-anon-key';
+    const SUPABASE_URL = 'https://eqqxpznfmszeewfiagnn.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVxcXhwem5mbXN6ZWV3ZmlhZ25uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEyMzgzMzYsImV4cCI6MjA1NjgxNDMzNn0.Efyv9JMODab3ek-bEgUQ6orioKdJnlqfywVjNfo6HHk';
     
     // Skip initialization if using placeholder values
     if (SUPABASE_URL === 'https://your-project-url.supabase.co' || 
