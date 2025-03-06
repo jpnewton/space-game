@@ -12,22 +12,22 @@ class Starfield {
       });
     }
   }
-  
+
   update() {
     for (let star of this.stars) {
       star.y += star.speed;
-      
+
       // Reset star position when it goes off screen
       if (star.y > height) {
         star.y = 0;
         star.x = random(width);
       }
-      
+
       // Twinkle effect
       star.brightness = 150 + 105 * sin(frameCount * star.twinkleRate);
     }
   }
-  
+
   display() {
     noStroke();
     for (let star of this.stars) {

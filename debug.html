@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Space Shooter - Debug Page</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f0f0; }
+    .test-section { margin-bottom: 20px; padding: 15px; background: white; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    button { padding: 8px 16px; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    pre { background: #f5f5f5; padding: 10px; border-radius: 4px; overflow: auto; }
+    .success { color: green; }
+    .error { color: red; }
+  </style>
+</head>
+<body>
+  <h1>Space Shooter Game - Debug Tools</h1>
+  
+  <div class="test-section">
+    <h2>Canvas Rendering Test</h2>
+    <canvas id="testCanvas" width="400" height="200" style="border:1px solid #000;"></canvas>
+    <button onclick="testCanvasRendering()">Test Canvas</button>
+    <div id="canvasResult"></div>
+  </div>
+  
+  <div class="test-section">
+    <h2>Image Loading Test</h2>
+    <button onclick="testImageLoading()">Test Images</button>
+    <div id="imageResult"></div>
+  </div>
+  
+  <div class="test-section">
+    <h2>Supabase Connection Test</h2>
+    <button onclick="testSupabaseConnection()">Test Supabase</button>
+    <div id="supabaseResult"></div>
+  </div>
+  
+  <script src="config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+  <script>
+    // Canvas test
+    function testCanvasRendering() {
+      const canvas = document.getElementById('testCanvas');
+      const ctx = canvas.getContext('2d');
+      const result = document.getElementById('canvasResult');
+      
+      try {
+        // Clear canvas
+        ctx.fillStyle = 'black';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Draw text
+        ctx.fillStyle = 'white';
+        ctx.font = '16px Arial';
+        ctx.fillText('Canvas is working!', 20, 30);
+        
+        // Draw ship
+        ctx.fillStyle = 'green';
+        ctx.beginPath();
+        ctx.moveTo(200, 70);
+        ctx.lineTo(180, 110);
+        ctx.lineTo(220, 110);
+        ctx.closePath();
+        ctx.fill();
+        
+        result.innerHTML = '<span class="success">Canvas rendering test passed!</span>';
+      } catch (error) {
+        result.innerHTML = `<span class="error">Canvas test failed: ${error.message}</span>`;
+        console.error('Canvas test error:', error);
+      }
+    }
+    
+    // Image loading test
+    function testImageLoading() {
+      const result = document.getElementById('imageResult');
+      result.innerHTML = 'Testing image loading...';
+      
+      const testImages = [
+        { name: 'Player', src: 'images/player.png' },
+        { name: 'Enemy', src: 'images/enemy.png' }
+      ];
+      
+      let loadedCount = 0;
+      let errorCount = 0;
+      const output = [];
+      
+      testImages.forEach(img => {
+        const image = new Image();
+        image.onload = () => {
+          loadedCount++;
+          output.push(`<div class="success">✓ ${img.name} loaded successfully (${image.width}x${image.height})</div>`);
+          checkComplete();
+        };
+        
+        image.onerror = (e) => {
+          errorCount++;
+          output.push(`<div class="error">✗ ${img.name} failed to load from ${img.src}</div>`);
+          checkComplete();
+        };
+        
+        image.src = img.src;
+      });
+      
+      function checkComplete() {
+        if (loadedCount + errorCount === testImages.length) {
+          result.innerHTML = output.join('') + 
+            `<p>${loadedCount} of ${testImages.length} images loaded successfully</p>`;
+        }
+      }
+    }
+    
+    // Supabase test
+    function testSupabaseConnection() {
+      const result = document.getElementById('supabaseResult');
+      result.innerHTML = 'Testing Supabase connection...';
+      
+      try {
+        // Initialize Supabase
+        const initialized = initSupabase();
+        
+        if (!initialized) {
+          result.innerHTML = '<span class="error">Supabase not properly configured. Check your config.js file.</span>';
+          return;
+        }
+        
+        result.innerHTML = '<span class="success">Supabase client initialized successfully!</span>';
+      } catch (error) {
+        result.innerHTML = `<span class="error">Supabase test failed: ${error.message}</span>`;
+        console.error('Supabase test error:', error);
+      }
+    }
+  </script>
+</body>
+</html>

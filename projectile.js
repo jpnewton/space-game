@@ -8,18 +8,18 @@ class Projectile {
     this.damage = damage;
     this.life = 60; // Max lifespan to prevent lingering projectiles
   }
-  
+
   update() {
     this.pos.add(this.vel);
     this.life--;
-    
+
     if (this.fromPlayer) {
       // Create particle trail for player projectiles
       if (frameCount % 2 === 0) {
         particles.push(new Particle(
-          this.pos.x, 
-          this.pos.y, 
-          random(-0.5, 0.5), 
+          this.pos.x,
+          this.pos.y,
+          random(-0.5, 0.5),
           random(-0.5, 0.5),
           random(2, 4),
           color(0, 255, 200, 100),
@@ -30,9 +30,9 @@ class Projectile {
       // Create particle trail for enemy projectiles
       if (frameCount % 2 === 0) {
         particles.push(new Particle(
-          this.pos.x, 
-          this.pos.y, 
-          random(-0.5, 0.5), 
+          this.pos.x,
+          this.pos.y,
+          random(-0.5, 0.5),
           random(-0.5, 0.5),
           random(2, 4),
           color(255, 100, 0, 100),
@@ -41,29 +41,29 @@ class Projectile {
       }
     }
   }
-  
+
   display() {
     push();
     translate(this.pos.x, this.pos.y);
-    
+
     noStroke();
     fill(this.color);
-    
+
     if (this.fromPlayer) {
       // Player projectile - longer, laser-like
-      rect(-this.size/4, -this.size, this.size/2, this.size*2, 2);
-      
+      rect(-this.size / 4, -this.size, this.size / 2, this.size * 2, 2);
+
       // Glow effect
       fill(this.color.levels[0], this.color.levels[1], this.color.levels[2], 100);
       ellipse(0, 0, this.size * 1.5);
     } else {
       // Enemy projectile - round with energy field effect
       ellipse(0, 0, this.size);
-      
+
       // Glow effect
       fill(this.color.levels[0], this.color.levels[1], this.color.levels[2], 100);
       ellipse(0, 0, this.size * 1.5);
-      
+
       // Add rotating lines for energy field look
       stroke(this.color);
       strokeWeight(1);
@@ -73,10 +73,10 @@ class Projectile {
       line(0, -this.size, 0, this.size);
       pop();
     }
-    
+
     pop();
   }
-  
+
   isOffScreen() {
     return (
       this.pos.x < 0 ||

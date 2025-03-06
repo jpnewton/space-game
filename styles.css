@@ -1,0 +1,53 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  color: #fff;
+}
+
+canvas {
+  display: block;
+  margin: 0 auto;
+  border: 1px solid #00ffdd;
+  box-shadow: 0 0 20px rgba(0, 255, 221, 0.5);
+}
+
+#game-container {
+  position: relative;
+}
+
+#social-share {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+button#twitter-share {
+  background-color: #1D9BF0;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+button#twitter-share:hover {
+  background-color: #0c84d1;
+}
+
+@media (max-width: 800px) {
+  canvas {
+    width: 100%;
+    height: auto;
+  }
+}

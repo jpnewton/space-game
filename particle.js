@@ -9,7 +9,7 @@ class Particle {
     this.life = life;
     this.originalLife = life;
   }
-  
+
   getRandomColor() {
     let colors = [
       color(255, 0, 0, 200),    // Red
@@ -19,29 +19,29 @@ class Particle {
     ];
     return random(colors);
   }
-  
+
   update() {
     this.vel.add(this.acc);
     this.pos.add(this.vel);
     this.acc.mult(0);
-    
+
     // Slowly reduce size
     this.size = map(this.life, 0, this.originalLife, 0, this.originalSize);
-    
+
     // Reduce life
     this.life--;
   }
-  
+
   display() {
     if (this.life <= 0) return;
-    
+
     push();
     noStroke();
     fill(this.color);
     ellipse(this.pos.x, this.pos.y, this.size);
     pop();
   }
-  
+
   isDead() {
     return this.life <= 0;
   }
